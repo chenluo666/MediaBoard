@@ -1,0 +1,12 @@
+name = "anime-schedule-board"
+main = "worker.js"
+compatibility_date = "2026-09-07"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "anime-schedule"
+database_id = "your-d1-database-id"
+
+[vars]
+GITHUB_REPO = "YOUR_GITHUB_USERNAME/YOUR_GITHUB_REPO"
+GITHUB_BRANCH = "main"
