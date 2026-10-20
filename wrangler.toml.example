@@ -1,12 +1,23 @@
-name = "anime-schedule-board"
+name = "mediaboard"
 main = "worker.js"
 compatibility_date = "2026-09-07"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "anime-schedule"
+database_name = "mediaboard"
 database_id = "your-d1-database-id"
+
+# 每天 UTC 03:00 = 北京时间 11:00，自动记录一次 TMDB 人气快照。
+# 没有 Cron Trigger，页面的「人气趋势」折线永远不会出现。
+[triggers]
+crons = ["0 3 * * *"]
 
 [vars]
 GITHUB_REPO = "YOUR_GITHUB_USERNAME/YOUR_GITHUB_REPO"
 GITHUB_BRANCH = "main"
+# 每天自动任务跑完后自动推送 GitHub（关掉就删掉这行或改成 "0"）
+AUTO_SYNC_GITHUB = "1"
+
+# 以下两项属于敏感信息，请用 Secret 注入，不要写在这里：
+#   npx wrangler secret put GITHUB_TOKEN     # GitHub PAT，需要 Contents: Read and write
+#   npx wrangler secret put ADMIN_PASSWORD   # 管理员口令，务必覆盖代码里的默认值
